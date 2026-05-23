@@ -1,0 +1,354 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-grid">
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside class="w-64 min-h-screen bg-slate-900/90 border-r border-slate-700/50 fixed left-0 top-0 z-40 flex flex-col">
+            <div class="p-6 border-b border-slate-700/50">
+                <h1 class="font-display font-bold text-xl text-white">Smart<span class="text-sky-400">Parking</span></h1>
+                <p class="text-slate-500 text-xs mt-1">Panel Administrador</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-1">
+                <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    Dashboard
+                </a>
+                <a href="/admin/espacios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-sky-500/20 text-sky-400 text-sm font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/></svg>
+                    Gestión de Espacios
+                </a>
+                <a href="/admin/usuarios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    Gestión de Usuarios
+                </a>
+                <a href="/admin/reservas" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    Gestión de Reservas
+                </a>
+                <a href="/admin/personal" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Gestión de Personal
+                </a>
+                <a href="/admin/pagos" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    Gestión de Pagos
+                </a>
+                <a href="/admin/mantenimiento" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Mantenimiento
+                </a>
+                <a href="/admin/reportes" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    Reportes
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-700/50">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 text-xs font-bold">
+                        {{ usuario_nombre[0]|upper }}
+                    </div>
+                    <div>
+                        <p class="text-white text-xs font-medium">{{ usuario_nombre }}</p>
+                        <p class="text-slate-500 text-xs">Administrador</p>
+                    </div>
+                </div>
+                <a href="/auth/logout" class="flex items-center gap-2 text-slate-400 hover:text-red-400 text-xs transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    Cerrar Sesión
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="ml-64 flex-1 p-8">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="font-display text-3xl font-bold text-white">Gestión de <span class="text-sky-400">Espacios</span></h1>
+                    <p class="text-slate-400 mt-1">Administra todas las plazas del estacionamiento</p>
+                </div>
+                <button onclick="document.getElementById('modalCrear').classList.remove('hidden')"
+                    class="bg-sky-500 hover:bg-sky-400 text-white font-semibold px-5 py-2.5 rounded-xl transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    Nuevo Espacio
+                </button>
+            </div>
+
+            {% if exito %}
+            <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl mb-6 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                {{ exito }}
+            </div>
+            {% endif %}
+            {% if error %}
+            <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+                <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-white">{{ total }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Total</p>
+                </div>
+                <div class="bg-slate-800/60 border border-green-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-green-400">{{ disponibles }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Disponibles</p>
+                </div>
+                <div class="bg-slate-800/60 border border-red-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-red-400">{{ ocupados }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Ocupados</p>
+                </div>
+                <div class="bg-slate-800/60 border border-amber-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-amber-400">{{ reservados }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Reservados</p>
+                </div>
+                <div class="bg-slate-800/60 border border-slate-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-slate-400">{{ mantenimiento }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Mantenimiento</p>
+                </div>
+            </div>
+
+            <!-- Tabla -->
+            <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
+                <div class="p-5 border-b border-slate-700/50 flex items-center justify-between">
+                    <h2 class="font-display text-lg font-semibold text-white">Lista de Espacios</h2>
+                    <span class="text-slate-400 text-sm">{{ total }} registros</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700/50">
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">NÚMERO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">PISO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">TIPO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ESTADO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">TARIFA/HORA</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">TARIFA/DÍA</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for espacio in espacios %}
+                            <tr class="border-b border-slate-700/30 hover:bg-slate-700/20 transition">
+                                <td class="px-5 py-3">
+                                    <span class="text-white font-bold text-sm">{{ espacio.numero_espacio }}</span>
+                                </td>
+                                <td class="px-5 py-3 text-slate-300 text-sm">Piso {{ espacio.piso }}</td>
+                                <td class="px-5 py-3 text-slate-300 text-sm capitalize">{{ espacio.tipo_espacio }}</td>
+                                <td class="px-5 py-3">
+                                    {% if espacio.estado == 'disponible' %}
+                                    <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-xs px-2.5 py-1 rounded-full">disponible</span>
+                                    {% elif espacio.estado == 'ocupado' %}
+                                    <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2.5 py-1 rounded-full">ocupado</span>
+                                    {% elif espacio.estado == 'reservado' %}
+                                    <span class="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs px-2.5 py-1 rounded-full">reservado</span>
+                                    {% else %}
+                                    <span class="bg-slate-500/20 text-slate-400 border border-slate-500/30 text-xs px-2.5 py-1 rounded-full">mantenimiento</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-5 py-3 text-slate-300 text-sm">S/ {{ espacio.tarifa_por_hora }}</td>
+                                <td class="px-5 py-3 text-slate-300 text-sm">S/ {{ espacio.tarifa_por_dia }}</td>
+                                <td class="px-5 py-3">
+                                    <div class="flex items-center gap-2">
+                                        <form method="post" action="/admin/espacios/estado/{{ espacio.id_espacio }}">
+                                            <select name="estado" onchange="this.form.submit()"
+                                                class="bg-slate-700 border border-slate-600 text-white text-xs rounded-lg px-2 py-1.5 focus:outline-none focus:border-sky-500/60">
+                                                <option value="disponible" {% if espacio.estado == 'disponible' %}selected{% endif %}>Disponible</option>
+                                                <option value="ocupado" {% if espacio.estado == 'ocupado' %}selected{% endif %}>Ocupado</option>
+                                                <option value="reservado" {% if espacio.estado == 'reservado' %}selected{% endif %}>Reservado</option>
+                                                <option value="mantenimiento" {% if espacio.estado == 'mantenimiento' %}selected{% endif %}>Mantenimiento</option>
+                                            </select>
+                                        </form>
+                                        <button
+                                            data-id="{{ espacio.id_espacio }}"
+                                            data-numero="{{ espacio.numero_espacio }}"
+                                            data-piso="{{ espacio.piso }}"
+                                            data-tipo="{{ espacio.tipo_espacio }}"
+                                            data-estado="{{ espacio.estado }}"
+                                            data-hora="{{ espacio.tarifa_por_hora }}"
+                                            data-dia="{{ espacio.tarifa_por_dia }}"
+                                            data-mensual="{{ espacio.tarifa_mensual }}"
+                                            onclick="abrirEditar(this)"
+                                            class="bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/30 text-xs px-3 py-1.5 rounded-lg transition">
+                                            Editar
+                                        </button>
+                                        <form method="post" action="/admin/espacios/eliminar/{{ espacio.id_espacio }}"
+                                            onsubmit="return confirm('¿Eliminar espacio {{ espacio.numero_espacio }}?')">
+                                            <button type="submit"
+                                                class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs px-3 py-1.5 rounded-lg transition">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Modal Crear -->
+<div id="modalCrear" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-lg">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Nuevo Espacio</h3>
+            <button onclick="document.getElementById('modalCrear').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" action="/admin/espacios/crear" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Número</label>
+                    <input type="text" name="numero_espacio" placeholder="A01"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Piso</label>
+                    <input type="number" name="piso" min="1" max="10" value="1"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tipo</label>
+                    <select name="tipo_espacio" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                        <option value="auto">Auto</option>
+                        <option value="moto">Moto</option>
+                        <option value="discapacitado">Discapacitado</option>
+                        <option value="electrico">Eléctrico</option>
+                        <option value="camioneta">Camioneta</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Estado</label>
+                    <select name="estado" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                        <option value="disponible">Disponible</option>
+                        <option value="mantenimiento">Mantenimiento</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tarifa/Hora</label>
+                    <input type="number" name="tarifa_por_hora" step="0.50" min="0" value="3.00"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tarifa/Día</label>
+                    <input type="number" name="tarifa_por_dia" step="0.50" min="0" value="20.00"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tarifa/Mes</label>
+                    <input type="number" name="tarifa_mensual" step="1" min="0" value="150.00"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button type="button" onclick="document.getElementById('modalCrear').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Crear Espacio</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div id="modalEditar" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-lg">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Editar Espacio</h3>
+            <button onclick="document.getElementById('modalEditar').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" id="formEditar" action="" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Número</label>
+                    <input type="text" name="numero_espacio" id="edit_numero"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Piso</label>
+                    <input type="number" name="piso" id="edit_piso" min="1" max="10"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tipo</label>
+                    <select name="tipo_espacio" id="edit_tipo" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                        <option value="auto">Auto</option>
+                        <option value="moto">Moto</option>
+                        <option value="discapacitado">Discapacitado</option>
+                        <option value="electrico">Eléctrico</option>
+                        <option value="camioneta">Camioneta</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Estado</label>
+                    <select name="estado" id="edit_estado" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                        <option value="disponible">Disponible</option>
+                        <option value="ocupado">Ocupado</option>
+                        <option value="reservado">Reservado</option>
+                        <option value="mantenimiento">Mantenimiento</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tarifa/Hora</label>
+                    <input type="number" name="tarifa_por_hora" id="edit_hora" step="0.50" min="0"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tarifa/Día</label>
+                    <input type="number" name="tarifa_por_dia" id="edit_dia" step="0.50" min="0"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tarifa/Mes</label>
+                    <input type="number" name="tarifa_mensual" id="edit_mensual" step="1" min="0"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button type="button" onclick="document.getElementById('modalEditar').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function abrirEditar(btn) {
+    const id = btn.dataset.id;
+    const numero = btn.dataset.numero;
+    const piso = btn.dataset.piso;
+    const tipo = btn.dataset.tipo;
+    const estado = btn.dataset.estado;
+    const hora = btn.dataset.hora;
+    const dia = btn.dataset.dia;
+    const mensual = btn.dataset.mensual;
+
+    document.getElementById('formEditar').action = '/admin/espacios/editar/' + id;
+    document.getElementById('edit_numero').value = numero;
+    document.getElementById('edit_piso').value = piso;
+    document.getElementById('edit_tipo').value = tipo;
+    document.getElementById('edit_estado').value = estado;
+    document.getElementById('edit_hora').value = parseFloat(hora);
+    document.getElementById('edit_dia').value = parseFloat(dia);
+    document.getElementById('edit_mensual').value = parseFloat(mensual);
+    document.getElementById('modalEditar').classList.remove('hidden');
+}
+</script>
+{% endblock %}

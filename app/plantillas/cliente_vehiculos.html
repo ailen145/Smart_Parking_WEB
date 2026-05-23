@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-grid">
+
+    <!-- Navbar -->
+    <nav class="border-b border-slate-700/50 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-sky-500/20 border border-sky-500/30 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                    </svg>
+                </div>
+                <span class="font-display font-bold text-lg text-white">Smart<span class="text-sky-400">Parking</span></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="/cliente/dashboard" class="text-slate-400 hover:text-white text-sm transition">← Dashboard</a>
+                <a href="/cliente/reservas" class="text-slate-400 hover:text-white text-sm transition">Mis Reservas</a>
+                <a href="/cliente/perfil" class="text-slate-400 hover:text-white text-sm transition">Mi Perfil</a>
+                <a href="/auth/logout" class="text-slate-400 hover:text-red-400 text-sm transition">Salir</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-6 py-8">
+
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="font-display text-3xl font-bold text-white">Mis <span class="text-sky-400">Vehículos</span></h1>
+                <p class="text-slate-400 mt-1">Gestiona tus vehículos registrados</p>
+            </div>
+            <button onclick="document.getElementById('modalAgregar').classList.remove('hidden')"
+                class="bg-sky-500 hover:bg-sky-400 text-white font-semibold px-5 py-2.5 rounded-xl transition flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Agregar Vehículo
+            </button>
+        </div>
+
+        {% if exito %}
+        <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl mb-6 text-sm">
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            {{ exito }}
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 text-sm">
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if vehiculos %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {% for v in vehiculos %}
+            <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5">
+                <div class="flex items-start justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-500/30 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold text-lg">{{ v.placa }}</p>
+                            <p class="text-slate-400 text-sm">{{ v.marca }} {{ v.modelo }}</p>
+                        </div>
+                    </div>
+                    <span class="bg-slate-700/50 text-slate-300 text-xs px-2.5 py-1 rounded-full capitalize">{{ v.tipo_vehiculo }}</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="bg-slate-900/40 rounded-lg p-2 text-center">
+                        <p class="text-slate-500 text-xs">Color</p>
+                        <p class="text-white text-xs font-medium mt-0.5">{{ v.color }}</p>
+                    </div>
+                    <div class="bg-slate-900/40 rounded-lg p-2 text-center">
+                        <p class="text-slate-500 text-xs">Año</p>
+                        <p class="text-white text-xs font-medium mt-0.5">{{ v.anio }}</p>
+                    </div>
+                    <div class="bg-slate-900/40 rounded-lg p-2 text-center">
+                        <p class="text-slate-500 text-xs">Tipo</p>
+                        <p class="text-white text-xs font-medium mt-0.5 capitalize">{{ v.tipo_vehiculo }}</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button
+                        data-id="{{ v.id_vehiculo }}"
+                        data-placa="{{ v.placa }}"
+                        data-marca="{{ v.marca }}"
+                        data-modelo="{{ v.modelo }}"
+                        data-color="{{ v.color }}"
+                        data-tipo="{{ v.tipo_vehiculo }}"
+                        data-anio="{{ v.anio }}"
+                        onclick="abrirEditar(this)"
+                        class="flex-1 bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/30 text-xs py-2 rounded-lg transition">
+                        Editar
+                    </button>
+                    <form method="post" action="/cliente/vehiculos/eliminar/{{ v.id_vehiculo }}"
+                        onsubmit="return confirm('¿Eliminar el vehículo {{ v.placa }}?')" class="flex-1">
+                        <button type="submit"
+                            class="w-full bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs py-2 rounded-lg transition">
+                            Eliminar
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="text-center py-20">
+            <div class="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+            </div>
+            <p class="text-slate-400 text-lg font-medium">No tienes vehículos registrados</p>
+            <p class="text-slate-500 text-sm mt-1">Agrega tu primer vehículo</p>
+            <button onclick="document.getElementById('modalAgregar').classList.remove('hidden')"
+                class="inline-block mt-4 bg-sky-500 hover:bg-sky-400 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition">
+                + Agregar Vehículo
+            </button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal Agregar -->
+<div id="modalAgregar" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-md">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Agregar Vehículo</h3>
+            <button onclick="document.getElementById('modalAgregar').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" action="/cliente/vehiculos/agregar" class="space-y-4">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Placa</label>
+                <input type="text" name="placa" placeholder="ABC-123"
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Marca</label>
+                    <input type="text" name="marca" placeholder="Toyota"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Modelo</label>
+                    <input type="text" name="modelo" placeholder="Corolla"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Color</label>
+                    <input type="text" name="color" placeholder="Blanco"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Año</label>
+                    <input type="number" name="anio" min="1990" max="2026" placeholder="2023"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Tipo de Vehículo</label>
+                <select name="tipo_vehiculo" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                    <option value="auto">Auto</option>
+                    <option value="moto">Moto</option>
+                    <option value="camioneta">Camioneta</option>
+                    <option value="electrico">Eléctrico</option>
+                </select>
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button type="button" onclick="document.getElementById('modalAgregar').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div id="modalEditar" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-md">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Editar Vehículo</h3>
+            <button onclick="document.getElementById('modalEditar').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" id="formEditar" action="" class="space-y-4">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Placa</label>
+                <input type="text" name="placa" id="edit_placa"
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Marca</label>
+                    <input type="text" name="marca" id="edit_marca"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Modelo</label>
+                    <input type="text" name="modelo" id="edit_modelo"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Color</label>
+                    <input type="text" name="color" id="edit_color"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Año</label>
+                    <input type="number" name="anio" id="edit_anio" min="1990" max="2026"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Tipo de Vehículo</label>
+                <select name="tipo_vehiculo" id="edit_tipo" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                    <option value="auto">Auto</option>
+                    <option value="moto">Moto</option>
+                    <option value="camioneta">Camioneta</option>
+                    <option value="electrico">Eléctrico</option>
+                </select>
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button type="button" onclick="document.getElementById('modalEditar').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function abrirEditar(btn) {
+    document.getElementById('formEditar').action = '/cliente/vehiculos/editar/' + btn.dataset.id;
+    document.getElementById('edit_placa').value = btn.dataset.placa;
+    document.getElementById('edit_marca').value = btn.dataset.marca;
+    document.getElementById('edit_modelo').value = btn.dataset.modelo;
+    document.getElementById('edit_color').value = btn.dataset.color;
+    document.getElementById('edit_anio').value = btn.dataset.anio;
+    document.getElementById('edit_tipo').value = btn.dataset.tipo;
+    document.getElementById('modalEditar').classList.remove('hidden');
+}
+</script>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-grid">
+
+    <!-- Navbar -->
+    <nav class="border-b border-slate-700/50 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-sky-500/20 border border-sky-500/30 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                    </svg>
+                </div>
+                <span class="font-display font-bold text-lg text-white">Smart<span class="text-sky-400">Parking</span></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="/cliente/dashboard" class="text-slate-400 hover:text-white text-sm transition">← Dashboard</a>
+                <a href="/cliente/reservas" class="text-slate-400 hover:text-white text-sm transition">Mis Reservas</a>
+                <a href="/cliente/vehiculos" class="text-slate-400 hover:text-white text-sm transition">Mis Vehículos</a>
+                <a href="/auth/logout" class="text-slate-400 hover:text-red-400 text-sm transition">Salir</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-3xl mx-auto px-6 py-8">
+
+        <div class="mb-8">
+            <h1 class="font-display text-3xl font-bold text-white">Mi <span class="text-sky-400">Perfil</span></h1>
+            <p class="text-slate-400 mt-1">Gestiona tu información personal</p>
+        </div>
+
+        {% if exito %}
+        <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl mb-6 text-sm">
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            {{ exito }}
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 text-sm">
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- Datos personales -->
+            <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-6">
+                <h2 class="font-display text-lg font-semibold text-white mb-5">Datos Personales</h2>
+                <form method="post" action="/cliente/perfil/editar" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Nombre</label>
+                            <input type="text" name="nombre" value="{{ usuario.nombre }}"
+                                class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Apellido</label>
+                            <input type="text" name="apellido" value="{{ usuario.apellido }}"
+                                class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Email</label>
+                        <input type="email" value="{{ usuario.email }}" disabled
+                            class="w-full bg-slate-700/30 border border-slate-600/30 text-slate-400 rounded-xl px-4 py-3 text-sm cursor-not-allowed">
+                        <p class="text-slate-500 text-xs mt-1">El email no se puede cambiar</p>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">DNI</label>
+                        <input type="text" value="{{ usuario.dni or '' }}" disabled
+                            class="w-full bg-slate-700/30 border border-slate-600/30 text-slate-400 rounded-xl px-4 py-3 text-sm cursor-not-allowed">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Teléfono</label>
+                        <input type="text" name="telefono" value="{{ usuario.telefono or '' }}" maxlength="9"
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                            class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Dirección</label>
+                        <input type="text" name="direccion" value="{{ usuario.direccion or '' }}"
+                            class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">
+                        Guardar Cambios
+                    </button>
+                </form>
+            </div>
+
+            <!-- Cambiar contraseña + info -->
+            <div class="space-y-6">
+                <!-- Info de cuenta -->
+                <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-6">
+                    <h2 class="font-display text-lg font-semibold text-white mb-4">Información de Cuenta</h2>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between py-2 border-b border-slate-700/30">
+                            <span class="text-slate-400 text-sm">Rol</span>
+                            <span class="bg-slate-700/50 text-slate-300 text-xs px-3 py-1 rounded-full capitalize">{{ usuario.tipo_usuario or 'usuario' }}</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-slate-700/30">
+                            <span class="text-slate-400 text-sm">Estado</span>
+                            {% if usuario.estado == 'activo' %}
+                            <span class="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full">activo</span>
+                            {% else %}
+                            <span class="bg-red-500/20 text-red-400 text-xs px-3 py-1 rounded-full">{{ usuario.estado }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="flex items-center justify-between py-2">
+                            <span class="text-slate-400 text-sm">Miembro desde</span>
+                            <span class="text-slate-300 text-xs">{{ usuario.fecha_registro.strftime('%d/%m/%Y') if usuario.fecha_registro else '—' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cambiar contraseña -->
+                <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-6">
+                    <h2 class="font-display text-lg font-semibold text-white mb-5">Cambiar Contraseña</h2>
+                    <form method="post" action="/cliente/perfil/cambiar-password" class="space-y-4">
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Contraseña Actual</label>
+                            <input type="password" name="password_actual" placeholder="••••••••"
+                                class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Nueva Contraseña</label>
+                            <input type="password" name="nueva_password" placeholder="Mínimo 8 caracteres" minlength="8"
+                                class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 text-sm font-medium mb-2">Confirmar Contraseña</label>
+                            <input type="password" name="confirmar_password" placeholder="Repite la contraseña"
+                                class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-amber-500 hover:bg-amber-400 text-white font-semibold py-3 rounded-xl transition">
+                            Cambiar Contraseña
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

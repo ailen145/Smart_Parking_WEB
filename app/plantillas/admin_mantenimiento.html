@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-grid">
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside class="w-64 min-h-screen bg-slate-900/90 border-r border-slate-700/50 fixed left-0 top-0 z-40 flex flex-col">
+            <div class="p-6 border-b border-slate-700/50">
+                <h1 class="font-display font-bold text-xl text-white">Smart<span class="text-sky-400">Parking</span></h1>
+                <p class="text-slate-500 text-xs mt-1">Panel Administrador</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-1">
+                <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    Dashboard
+                </a>
+                <a href="/admin/espacios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/></svg>
+                    Gestión de Espacios
+                </a>
+                <a href="/admin/usuarios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    Gestión de Usuarios
+                </a>
+                <a href="/admin/reservas" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    Gestión de Reservas
+                </a>
+                <a href="/admin/personal" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Gestión de Personal
+                </a>
+                <a href="/admin/pagos" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    Gestión de Pagos
+                </a>
+                <a href="/admin/mantenimiento" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-sky-500/20 text-sky-400 text-sm font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Mantenimiento
+                </a>
+                <a href="/admin/reportes" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    Reportes
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-700/50">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 text-xs font-bold">
+                        {{ usuario_nombre[0]|upper }}
+                    </div>
+                    <div>
+                        <p class="text-white text-xs font-medium">{{ usuario_nombre }}</p>
+                        <p class="text-slate-500 text-xs">Administrador</p>
+                    </div>
+                </div>
+                <a href="/auth/logout" class="flex items-center gap-2 text-slate-400 hover:text-red-400 text-xs transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    Cerrar Sesión
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="ml-64 flex-1 p-8">
+
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="font-display text-3xl font-bold text-white">Gestión de <span class="text-sky-400">Mantenimiento</span></h1>
+                    <p class="text-slate-400 mt-1">Registra y controla el mantenimiento de espacios</p>
+                </div>
+                <button onclick="document.getElementById('modalCrear').classList.remove('hidden')"
+                    class="bg-sky-500 hover:bg-sky-400 text-white font-semibold px-5 py-2.5 rounded-xl transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    Nuevo Mantenimiento
+                </button>
+            </div>
+
+            {% if exito %}
+            <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl mb-6 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                {{ exito }}
+            </div>
+            {% endif %}
+            {% if error %}
+            <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-white">{{ total }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Total Registros</p>
+                </div>
+                <div class="bg-slate-800/60 border border-amber-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-amber-400">{{ activos }}</p>
+                    <p class="text-slate-400 text-xs mt-1">En Proceso</p>
+                </div>
+                <div class="bg-slate-800/60 border border-green-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-green-400">{{ completados }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Completados</p>
+                </div>
+                <div class="bg-slate-800/60 border border-sky-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-sky-400">S/ {{ "%.2f"|format(costo_total) }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Costo Total</p>
+                </div>
+            </div>
+
+            <!-- Tabla -->
+            <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
+                <div class="p-5 border-b border-slate-700/50 flex items-center justify-between">
+                    <h2 class="font-display text-lg font-semibold text-white">Historial de Mantenimiento</h2>
+                    <span class="text-slate-400 text-sm">{{ total }} registros</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700/50">
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ESPACIO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">TIPO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">DESCRIPCIÓN</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">RESPONSABLE</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">INICIO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">FIN</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">COSTO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ESTADO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in registros %}
+                            <tr class="border-b border-slate-700/30 hover:bg-slate-700/20 transition">
+                                <td class="px-5 py-3">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-lg bg-slate-600/50 flex items-center justify-center">
+                                            <span class="text-white text-xs font-bold">{{ r.espacio.numero_espacio if r.espacio else '?' }}</span>
+                                        </div>
+                                        <span class="text-slate-300 text-sm">Piso {{ r.espacio.piso if r.espacio else '—' }}</span>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3">
+                                    <span class="bg-slate-700/50 text-slate-300 text-xs px-2.5 py-1 rounded-full">{{ r.tipo_mantenimiento }}</span>
+                                </td>
+                                <td class="px-5 py-3 text-slate-400 text-xs max-w-xs truncate">{{ r.descripcion or '—' }}</td>
+                                <td class="px-5 py-3 text-slate-300 text-sm">
+                                    {% if r.personal_obj and r.personal_obj.usuario %}
+                                        {{ r.personal_obj.usuario.nombre }} {{ r.personal_obj.usuario.apellido }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </td>
+                                <td class="px-5 py-3 text-slate-400 text-xs">
+                                    {{ r.fecha_inicio.strftime('%d/%m/%Y %H:%M') if r.fecha_inicio else '—' }}
+                                </td>
+                                <td class="px-5 py-3 text-slate-400 text-xs">
+                                    {{ r.fecha_fin.strftime('%d/%m/%Y %H:%M') if r.fecha_fin else '—' }}
+                                </td>
+                                <td class="px-5 py-3 text-sky-400 text-sm font-medium">
+                                    S/ {{ "%.2f"|format(r.costo) if r.costo else '0.00' }}
+                                </td>
+                                <td class="px-5 py-3">
+                                    {% if r.estado == 'en_proceso' %}
+                                    <span class="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs px-2.5 py-1 rounded-full">en proceso</span>
+                                    {% elif r.estado == 'completado' %}
+                                    <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-xs px-2.5 py-1 rounded-full">completado</span>
+                                    {% else %}
+                                    <span class="bg-slate-500/20 text-slate-400 border border-slate-500/30 text-xs px-2.5 py-1 rounded-full">{{ r.estado }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-5 py-3">
+                                    <div class="flex items-center gap-2">
+                                        {% if r.estado == 'en_proceso' %}
+                                        <form method="post" action="/admin/mantenimiento/completar/{{ r.id_mantenimiento }}">
+                                            <button type="submit"
+                                                class="bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/30 text-xs px-3 py-1.5 rounded-lg transition">
+                                                Completar
+                                            </button>
+                                        </form>
+                                        {% endif %}
+                                        <form method="post" action="/admin/mantenimiento/eliminar/{{ r.id_mantenimiento }}"
+                                            onsubmit="return confirm('¿Eliminar este registro?')">
+                                            <button type="submit"
+                                                class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs px-3 py-1.5 rounded-lg transition">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="9" class="px-5 py-10 text-center text-slate-500 text-sm">
+                                    No hay registros de mantenimiento
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Modal Nuevo Mantenimiento -->
+<div id="modalCrear" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-lg max-h-screen overflow-y-auto">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Nuevo Mantenimiento</h3>
+            <button onclick="document.getElementById('modalCrear').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" action="/admin/mantenimiento/crear" class="space-y-4">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Espacio</label>
+                <select name="id_espacio" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    <option value="">Selecciona un espacio</option>
+                    {% for e in espacios %}
+                    <option value="{{ e.id_espacio }}">{{ e.numero_espacio }} — Piso {{ e.piso }} ({{ e.estado }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Responsable</label>
+                <select name="id_personal" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    <option value="">Selecciona personal</option>
+                    {% for p in personal_list %}
+                    <option value="{{ p.id_personal }}">
+                        {{ p.usuario.nombre if p.usuario else '?' }} {{ p.usuario.apellido if p.usuario else '' }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Tipo de Mantenimiento</label>
+                <select name="tipo_mantenimiento" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    <option value="preventivo">Preventivo</option>
+                    <option value="correctivo">Correctivo</option>
+                    <option value="limpieza">Limpieza</option>
+                    <option value="pintura">Pintura</option>
+                    <option value="señalizacion">Señalización</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Descripción</label>
+                <textarea name="descripcion" rows="2" placeholder="Describe el trabajo a realizar..."
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition resize-none"></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Fecha Inicio</label>
+                    <input type="datetime-local" name="fecha_inicio"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Fecha Fin (opcional)</label>
+                    <input type="datetime-local" name="fecha_fin"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+                </div>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Costo Estimado (S/)</label>
+                <input type="number" name="costo" step="0.50" min="0" value="0" placeholder="0.00"
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition">
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button type="button" onclick="document.getElementById('modalCrear').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

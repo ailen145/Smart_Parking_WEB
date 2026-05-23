@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen bg-grid">
+  <div class="flex">
+
+    <!-- Sidebar -->
+    <aside class="w-64 min-h-screen bg-slate-900/90 border-r border-slate-700/50 fixed left-0 top-0 z-40 flex flex-col">
+      <div class="p-6 border-b border-slate-700/50">
+        <h1 class="font-display font-bold text-xl text-white">Smart<span class="text-sky-400">Parking</span></h1>
+        <p class="text-slate-500 text-xs mt-1">Panel Administrador</p>
+      </div>
+      <nav class="flex-1 p-4 space-y-1">
+        <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          Dashboard
+        </a>
+        <a href="/admin/espacios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/></svg>
+          Gestión de Espacios
+        </a>
+        <a href="/admin/usuarios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          Gestión de Usuarios
+        </a>
+        <a href="/admin/reservas" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-sky-500/20 text-sky-400 text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          Gestión de Reservas
+        </a>
+        <a href="/admin/personal" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Gestión de Personal
+        </a>
+        <a href="/admin/pagos" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          Gestión de Pagos
+        </a>
+        <a href="/admin/mantenimiento" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Mantenimiento
+        </a>
+        <a href="/admin/reportes" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Reportes
+        </a>
+      </nav>
+      <div class="p-4 border-t border-slate-700/50">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-8 h-8 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 text-xs font-bold">
+            {{ usuario_nombre[0]|upper }}
+          </div>
+          <div>
+            <p class="text-white text-xs font-medium">{{ usuario_nombre }}</p>
+            <p class="text-slate-500 text-xs">Administrador</p>
+          </div>
+        </div>
+        <a href="/auth/logout" class="flex items-center gap-2 text-slate-400 hover:text-red-400 text-xs transition">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          Cerrar Sesión
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="ml-64 flex-1 p-8">
+
+      <div class="mb-8">
+        <h1 class="font-display text-3xl font-bold text-white">Gestión de <span class="text-sky-400">Reservas</span></h1>
+        <p class="text-slate-400 mt-1">Administra todas las reservas del estacionamiento</p>
+      </div>
+
+      {% if exito %}
+      <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl mb-6 text-sm">
+        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        {{ exito }}
+      </div>
+      {% endif %}
+      {% if error %}
+      <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 text-sm">
+        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+        {{ error }}
+      </div>
+      {% endif %}
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+          <p class="text-2xl font-display font-bold text-white">{{ estadisticas.total }}</p>
+          <p class="text-slate-400 text-xs mt-1">Total Reservas</p>
+        </div>
+        <div class="bg-slate-800/60 border border-green-500/20 rounded-2xl p-4 text-center">
+          <p class="text-2xl font-display font-bold text-green-400">{{ estadisticas.activas }}</p>
+          <p class="text-slate-400 text-xs mt-1">Activas</p>
+        </div>
+        <div class="bg-slate-800/60 border border-red-500/20 rounded-2xl p-4 text-center">
+          <p class="text-2xl font-display font-bold text-red-400">{{ estadisticas.canceladas }}</p>
+          <p class="text-slate-400 text-xs mt-1">Canceladas</p>
+        </div>
+        <div class="bg-slate-800/60 border border-amber-500/20 rounded-2xl p-4 text-center">
+          <p class="text-2xl font-display font-bold text-amber-400">S/ {{ "%.2f"|format(estadisticas.ingresos) }}</p>
+          <p class="text-slate-400 text-xs mt-1">Ingresos Totales</p>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 mb-6">
+        <form method="get" action="/admin/reservas" class="flex flex-col sm:flex-row gap-3 flex-wrap">
+          <input type="text" name="buscar" value="{{ filtro_buscar }}"
+                 placeholder="Buscar por nombre o placa..."
+                 class="flex-1 min-w-[180px] bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sky-500/60 transition"/>
+          <select name="estado" class="bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sky-500/60 transition min-w-[150px]">
+            <option value="todos" {% if filtro_estado == "todos" %}selected{% endif %}>Todos los estados</option>
+            {% for e in estados %}
+            <option value="{{ e }}" {% if filtro_estado == e %}selected{% endif %}>{{ e|capitalize }}</option>
+            {% endfor %}
+          </select>
+          <input type="date" name="fecha" value="{{ filtro_fecha }}"
+                 class="bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sky-500/60 transition min-w-[150px]"/>
+          <button type="submit" class="bg-sky-500 hover:bg-sky-400 text-white font-medium px-5 py-2.5 rounded-xl text-sm transition">Filtrar</button>
+          <a href="/admin/reservas" class="bg-slate-700 hover:bg-slate-600 text-white font-medium px-5 py-2.5 rounded-xl text-sm transition text-center">Limpiar</a>
+        </form>
+      </div>
+
+      <!-- Tabla -->
+      <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
+        <div class="p-5 border-b border-slate-700/50 flex items-center justify-between">
+          <h2 class="font-display text-lg font-semibold text-white">Lista de Reservas</h2>
+          <span class="text-slate-400 text-sm">{{ reservas|length }} registros</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-slate-700/50">
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">#</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">USUARIO</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">VEHÍCULO</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ESPACIO</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">INICIO</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">FIN</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">MONTO</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ESTADO</th>
+                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ACCIONES</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if reservas %}
+                {% for r in reservas %}
+                <tr class="border-b border-slate-700/30 hover:bg-slate-700/20 transition">
+                  <td class="px-5 py-3 text-slate-500 text-xs font-mono">#{{ r.id_reserva }}</td>
+                  <td class="px-5 py-3">
+                    {% if r.usuario %}
+                    <div class="flex items-center gap-2">
+                      <div class="w-7 h-7 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-400 text-xs font-bold">
+                        {{ r.usuario.nombre[0]|upper }}
+                      </div>
+                      <div>
+                        <p class="text-white text-sm font-medium">{{ r.usuario.nombre }} {{ r.usuario.apellido }}</p>
+                        <p class="text-slate-400 text-xs">{{ r.usuario.email }}</p>
+                      </div>
+                    </div>
+                    {% else %}<span class="text-slate-500 text-sm">—</span>{% endif %}
+                  </td>
+                  <td class="px-5 py-3">
+                    {% if r.vehiculo %}
+                    <span class="bg-slate-700/50 border border-slate-600/50 text-slate-300 text-xs font-mono px-2.5 py-1 rounded-lg">{{ r.vehiculo.placa }}</span>
+                    <p class="text-slate-500 text-xs mt-1">{{ r.vehiculo.marca }} {{ r.vehiculo.modelo }}</p>
+                    {% else %}<span class="text-slate-500 text-sm">—</span>{% endif %}
+                  </td>
+                  <td class="px-5 py-3">
+                    {% if r.espacio %}
+                    <p class="text-white text-sm font-medium">{{ r.espacio.numero_espacio }}</p>
+                    <p class="text-slate-400 text-xs">Piso {{ r.espacio.piso }} · {{ r.espacio.tipo_espacio }}</p>
+                    {% else %}<span class="text-slate-500 text-sm">—</span>{% endif %}
+                  </td>
+                  <td class="px-5 py-3 text-slate-300 text-sm">
+                    {% if r.fecha_inicio %}{{ r.fecha_inicio.strftime("%d/%m/%Y") }}<br><span class="text-slate-500 text-xs">{{ r.fecha_inicio.strftime("%H:%M") }}</span>{% else %}—{% endif %}
+                  </td>
+                  <td class="px-5 py-3 text-slate-300 text-sm">
+                    {% if r.fecha_fin %}{{ r.fecha_fin.strftime("%d/%m/%Y") }}<br><span class="text-slate-500 text-xs">{{ r.fecha_fin.strftime("%H:%M") }}</span>{% else %}—{% endif %}
+                  </td>
+                  <td class="px-5 py-3 text-white font-semibold text-sm">
+                    {% if r.monto_pagado %}S/ {{ "%.2f"|format(r.monto_pagado) }}{% else %}—{% endif %}
+                  </td>
+                  <td class="px-5 py-3">
+                    {% if r.estado == "activa" %}<span class="bg-green-500/20 text-green-400 border border-green-500/30 text-xs px-2.5 py-1 rounded-full">Activa</span>
+                    {% elif r.estado == "cancelada" %}<span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2.5 py-1 rounded-full">Cancelada</span>
+                    {% elif r.estado == "completada" %}<span class="bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs px-2.5 py-1 rounded-full">Completada</span>
+                    {% elif r.estado == "pendiente" %}<span class="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs px-2.5 py-1 rounded-full">Pendiente</span>
+                    {% else %}<span class="bg-slate-500/20 text-slate-400 border border-slate-500/30 text-xs px-2.5 py-1 rounded-full">{{ r.estado }}</span>{% endif %}
+                  </td>
+                  <td class="px-5 py-3">
+                    <a href="/admin/reservas/{{ r.id_reserva }}"
+                       class="bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/30 text-xs px-3 py-1.5 rounded-lg transition">
+                      Ver detalle
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              {% else %}
+              <tr>
+                <td colspan="9" class="text-center text-slate-500 py-12 text-sm">
+                  No se encontraron reservas con los filtros aplicados.
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+{% endblock %}

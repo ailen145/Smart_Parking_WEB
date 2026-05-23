@@ -1,0 +1,350 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-grid">
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside class="w-64 min-h-screen bg-slate-900/90 border-r border-slate-700/50 fixed left-0 top-0 z-40 flex flex-col">
+            <div class="p-6 border-b border-slate-700/50">
+                <h1 class="font-display font-bold text-xl text-white">Smart<span class="text-sky-400">Parking</span></h1>
+                <p class="text-slate-500 text-xs mt-1">Panel Administrador</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-1">
+                <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    Dashboard
+                </a>
+                <a href="/admin/espacios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/></svg>
+                    Gestión de Espacios
+                </a>
+                <a href="/admin/usuarios" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    Gestión de Usuarios
+                </a>
+                <a href="/admin/reservas" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    Gestión de Reservas
+                </a>
+                <a href="/admin/personal" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-sky-500/20 text-sky-400 text-sm font-medium">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Gestión de Personal
+                </a>
+                <a href="/admin/pagos" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    Gestión de Pagos
+                </a>
+                <a href="/admin/mantenimiento" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Mantenimiento
+                </a>
+                <a href="/admin/reportes" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-700/50 text-sm transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    Reportes
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-700/50">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 text-xs font-bold">
+                        {{ usuario_nombre[0]|upper }}
+                    </div>
+                    <div>
+                        <p class="text-white text-xs font-medium">{{ usuario_nombre }}</p>
+                        <p class="text-slate-500 text-xs">Administrador</p>
+                    </div>
+                </div>
+                <a href="/auth/logout" class="flex items-center gap-2 text-slate-400 hover:text-red-400 text-xs transition">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    Cerrar Sesión
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="ml-64 flex-1 p-8">
+
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="font-display text-3xl font-bold text-white">Gestión de <span class="text-sky-400">Personal</span></h1>
+                    <p class="text-slate-400 mt-1">Administra el personal del estacionamiento</p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="document.getElementById('modalPuesto').classList.remove('hidden')"
+                        class="bg-slate-700 hover:bg-slate-600 text-white font-semibold px-4 py-2.5 rounded-xl transition text-sm">
+                        + Nuevo Puesto
+                    </button>
+                    <button onclick="document.getElementById('modalCrear').classList.remove('hidden')"
+                        class="bg-sky-500 hover:bg-sky-400 text-white font-semibold px-5 py-2.5 rounded-xl transition flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        Registrar Personal
+                    </button>
+                </div>
+            </div>
+
+            {% if exito %}
+            <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl mb-6 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                {{ exito }}
+            </div>
+            {% endif %}
+            {% if error %}
+            <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-white">{{ total }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Total Personal</p>
+                </div>
+                <div class="bg-slate-800/60 border border-sky-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-sky-400">{{ puestos|length }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Puestos</p>
+                </div>
+                <div class="bg-slate-800/60 border border-green-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-green-400">{{ personal|selectattr('turno', 'equalto', 'mañana')|list|length }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Turno Mañana</p>
+                </div>
+                <div class="bg-slate-800/60 border border-amber-500/20 rounded-2xl p-4 text-center">
+                    <p class="text-2xl font-display font-bold text-amber-400">{{ personal|selectattr('turno', 'equalto', 'noche')|list|length }}</p>
+                    <p class="text-slate-400 text-xs mt-1">Turno Noche</p>
+                </div>
+            </div>
+
+            <!-- Puestos disponibles -->
+            {% if puestos %}
+            <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5 mb-6">
+                <h3 class="font-display text-sm font-semibold text-white mb-3">Puestos Registrados</h3>
+                <div class="flex flex-wrap gap-2">
+                    {% for puesto in puestos %}
+                    <span class="bg-slate-700/50 border border-slate-600/50 text-slate-300 text-xs px-3 py-1.5 rounded-full">
+                        {{ puesto.nombre_puesto }} — S/ {{ puesto.salario_base }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Tabla Personal -->
+            <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
+                <div class="p-5 border-b border-slate-700/50 flex items-center justify-between">
+                    <h2 class="font-display text-lg font-semibold text-white">Lista de Personal</h2>
+                    <span class="text-slate-400 text-sm">{{ total }} registros</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-slate-700/50">
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">EMPLEADO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">PUESTO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">TURNO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">CONTRATACIÓN</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">SALARIO</th>
+                                <th class="text-left text-slate-400 text-xs font-medium px-5 py-3">ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in personal %}
+                            <tr class="border-b border-slate-700/30 hover:bg-slate-700/20 transition">
+                                <td class="px-5 py-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 text-xs font-bold">
+                                            {{ p.usuario.nombre[0]|upper if p.usuario else '?' }}
+                                        </div>
+                                        <div>
+                                            <p class="text-white text-sm font-medium">
+                                                {{ p.usuario.nombre if p.usuario else '—' }} {{ p.usuario.apellido if p.usuario else '' }}
+                                            </p>
+                                            <p class="text-slate-400 text-xs">{{ p.usuario.email if p.usuario else '—' }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-3 text-slate-300 text-sm">
+                                    {{ p.puesto.nombre_puesto if p.puesto else '—' }}
+                                </td>
+                                <td class="px-5 py-3">
+                                    {% if p.turno == 'mañana' %}
+                                    <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-xs px-2.5 py-1 rounded-full">mañana</span>
+                                    {% elif p.turno == 'tarde' %}
+                                    <span class="bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs px-2.5 py-1 rounded-full">tarde</span>
+                                    {% elif p.turno == 'noche' %}
+                                    <span class="bg-slate-500/20 text-slate-300 border border-slate-500/30 text-xs px-2.5 py-1 rounded-full">noche</span>
+                                    {% else %}
+                                    <span class="bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs px-2.5 py-1 rounded-full">{{ p.turno }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-5 py-3 text-slate-400 text-xs">
+                                    {{ p.fecha_contratacion.strftime('%d/%m/%Y') if p.fecha_contratacion else '—' }}
+                                </td>
+                                <td class="px-5 py-3 text-slate-300 text-sm">
+                                    S/ {{ p.puesto.salario_base if p.puesto else '—' }}
+                                </td>
+                                <td class="px-5 py-3">
+                                    <div class="flex items-center gap-2">
+                                        <button
+                                            data-id="{{ p.id_personal }}"
+                                            data-puesto="{{ p.id_puesto }}"
+                                            data-turno="{{ p.turno }}"
+                                            data-fecha="{{ p.fecha_contratacion.strftime('%Y-%m-%d') if p.fecha_contratacion else '' }}"
+                                            onclick="abrirEditar(this)"
+                                            class="bg-sky-500/20 hover:bg-sky-500/30 text-sky-400 border border-sky-500/30 text-xs px-3 py-1.5 rounded-lg transition">
+                                            Editar
+                                        </button>
+                                        <form method="post" action="/admin/personal/eliminar/{{ p.id_personal }}"
+                                            onsubmit="return confirm('¿Eliminar este registro de personal?')">
+                                            <button type="submit"
+                                                class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 text-xs px-3 py-1.5 rounded-lg transition">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="px-5 py-10 text-center text-slate-500 text-sm">
+                                    No hay personal registrado aún
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Modal Registrar Personal -->
+<div id="modalCrear" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-md">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Registrar Personal</h3>
+            <button onclick="document.getElementById('modalCrear').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" action="/admin/personal/crear" class="space-y-4">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Usuario</label>
+                <select name="id_usuario" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    <option value="">Selecciona un usuario</option>
+                    {% for u in usuarios_personal %}
+                    <option value="{{ u.id_usuario }}">{{ u.nombre }} {{ u.apellido }} — {{ u.email }}</option>
+                    {% endfor %}
+                </select>
+                <p class="text-slate-500 text-xs mt-1">Solo usuarios con rol "personal"</p>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Puesto</label>
+                <select name="id_puesto" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    <option value="">Selecciona un puesto</option>
+                    {% for puesto in puestos %}
+                    <option value="{{ puesto.id_puesto }}">{{ puesto.nombre_puesto }} — S/ {{ puesto.salario_base }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Turno</label>
+                <select name="turno" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    <option value="mañana">Mañana (6am - 2pm)</option>
+                    <option value="tarde">Tarde (2pm - 10pm)</option>
+                    <option value="noche">Noche (10pm - 6am)</option>
+                    <option value="completo">Turno Completo</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Fecha de Contratación</label>
+                <input type="date" name="fecha_contratacion"
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button type="button" onclick="document.getElementById('modalCrear').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Editar Personal -->
+<div id="modalEditar" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-md">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Editar Personal</h3>
+            <button onclick="document.getElementById('modalEditar').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" id="formEditar" action="" class="space-y-4">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Puesto</label>
+                <select name="id_puesto" id="edit_puesto" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    {% for puesto in puestos %}
+                    <option value="{{ puesto.id_puesto }}">{{ puesto.nombre_puesto }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Turno</label>
+                <select name="turno" id="edit_turno" class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+                    <option value="mañana">Mañana (6am - 2pm)</option>
+                    <option value="tarde">Tarde (2pm - 10pm)</option>
+                    <option value="noche">Noche (10pm - 6am)</option>
+                    <option value="completo">Turno Completo</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Fecha de Contratación</label>
+                <input type="date" name="fecha_contratacion" id="edit_fecha"
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button type="button" onclick="document.getElementById('modalEditar').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Nuevo Puesto -->
+<div id="modalPuesto" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 w-full max-w-sm">
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-xl font-semibold text-white">Nuevo Puesto</h3>
+            <button onclick="document.getElementById('modalPuesto').classList.add('hidden')" class="text-slate-400 hover:text-white text-xl">✕</button>
+        </div>
+        <form method="post" action="/admin/puestos/crear" class="space-y-4">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Nombre del Puesto</label>
+                <input type="text" name="nombre_puesto" placeholder="Ej: Operador, Supervisor"
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+            </div>
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Salario Base (S/)</label>
+                <input type="number" name="salario_base" step="50" min="0" placeholder="1200"
+                    class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 transition" required>
+            </div>
+            <div class="flex gap-3">
+                <button type="button" onclick="document.getElementById('modalPuesto').classList.add('hidden')"
+                    class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">Cancelar</button>
+                <button type="submit"
+                    class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function abrirEditar(btn) {
+    document.getElementById('formEditar').action = '/admin/personal/editar/' + btn.dataset.id;
+    document.getElementById('edit_puesto').value = btn.dataset.puesto;
+    document.getElementById('edit_turno').value = btn.dataset.turno;
+    document.getElementById('edit_fecha').value = btn.dataset.fecha;
+    document.getElementById('modalEditar').classList.remove('hidden');
+}
+</script>
+{% endblock %}

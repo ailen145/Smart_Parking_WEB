@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-grid flex items-center justify-center p-4 py-10">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="absolute top-20 right-10 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative w-full max-w-lg">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-sky-500/20 border border-sky-500/30 mb-4 glow-sm">
+                <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                </svg>
+            </div>
+            <h1 class="font-display text-4xl font-bold text-white tracking-tight">Smart<span class="text-sky-400">Parking</span></h1>
+            <p class="text-slate-400 text-sm mt-1">Crea tu cuenta nueva</p>
+        </div>
+        <div class="bg-slate-800/60 backdrop-blur border border-slate-700/50 rounded-2xl p-8 glow">
+            <h2 class="font-display text-xl font-semibold text-white mb-6">Crear Cuenta</h2>
+            {% if error %}
+            <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-5 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                </svg>
+                {{ error }}
+            </div>
+            {% endif %}
+            <form method="post" action="/auth/registro" class="space-y-4" id="formRegistro">
+
+                <!-- Nombre y Apellido -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Nombre <span class="text-red-400">*</span></label>
+                        <input type="text" name="nombre" placeholder="Juan"
+                            class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 text-sm font-medium mb-2">Apellido <span class="text-red-400">*</span></label>
+                        <input type="text" name="apellido" placeholder="Pérez"
+                            class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                    </div>
+                </div>
+
+                <!-- DNI -->
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">DNI <span class="text-red-400">*</span></label>
+                    <input type="text" name="dni" placeholder="12345678" maxlength="8" minlength="8"
+                        pattern="\d{8}" title="El DNI debe tener exactamente 8 dígitos"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
+                    <p class="text-slate-500 text-xs mt-1">Exactamente 8 dígitos</p>
+                </div>
+
+                <!-- Teléfono -->
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Teléfono / Celular <span class="text-red-400">*</span></label>
+                    <input type="text" name="telefono" placeholder="987654321" maxlength="9" minlength="9"
+                        pattern="\d{9}" title="El teléfono debe tener exactamente 9 dígitos"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition"
+                        oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
+                    <p class="text-slate-500 text-xs mt-1">Exactamente 9 dígitos</p>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Correo Electrónico <span class="text-red-400">*</span></label>
+                    <input type="email" name="email" placeholder="correo@ejemplo.com"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                </div>
+
+                <!-- Dirección -->
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Dirección <span class="text-red-400">*</span></label>
+                    <input type="text" name="direccion" placeholder="Av. Principal 123, Lima"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                </div>
+
+                <!-- Contraseña -->
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Contraseña <span class="text-red-400">*</span></label>
+                    <input type="password" name="password" id="password" placeholder="Mínimo 8 caracteres"
+                        minlength="8"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Confirmar Contraseña <span class="text-red-400">*</span></label>
+                    <input type="password" name="confirmar_password" id="confirmar_password" placeholder="Repite tu contraseña"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                    <p id="error_password" class="text-red-400 text-xs mt-1 hidden">Las contraseñas no coinciden</p>
+                </div>
+
+                <!-- Tipo de Usuario -->
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Tipo de Usuario <span class="text-red-400">*</span></label>
+                    <select name="rol"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition">
+                        <option value="usuario">Usuario / Cliente</option>
+                        <option value="personal">Personal</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="btnRegistro"
+                    class="w-full bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/25 active:scale-95">
+                    Crear Cuenta →
+                </button>
+            </form>
+            <p class="text-center text-slate-400 text-sm mt-6">
+                ¿Ya tienes cuenta?
+                <a href="/auth/login" class="text-sky-400 hover:text-sky-300 font-medium transition">Inicia sesión aquí</a>
+            </p>
+        </div>
+        <p class="text-center text-slate-600 text-xs mt-6">Smart Parking © 2025</p>
+    </div>
+</div>
+
+<script>
+    const password = document.getElementById('password');
+    const confirmar = document.getElementById('confirmar_password');
+    const errorPass = document.getElementById('error_password');
+    const btn = document.getElementById('btnRegistro');
+
+    function validarPassword() {
+        if (confirmar.value && password.value !== confirmar.value) {
+            errorPass.classList.remove('hidden');
+            confirmar.classList.add('border-red-500/60');
+            return false;
+        } else {
+            errorPass.classList.add('hidden');
+            confirmar.classList.remove('border-red-500/60');
+            return true;
+        }
+    }
+
+    confirmar.addEventListener('input', validarPassword);
+
+    document.getElementById('formRegistro').addEventListener('submit', function(e) {
+        if (!validarPassword()) {
+            e.preventDefault();
+        }
+    });
+</script>
+{% endblock %}

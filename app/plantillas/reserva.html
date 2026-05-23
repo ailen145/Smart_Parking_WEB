@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-grid flex items-center justify-center p-4">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-green-500/5 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative w-full max-w-lg">
+        <div class="text-center mb-6">
+            <h1 class="font-display text-3xl font-bold text-white">Smart<span class="text-sky-400">Parking</span></h1>
+            <p class="text-slate-400 text-sm mt-1">Confirmar Reserva</p>
+        </div>
+        <div class="bg-slate-800/60 border border-sky-500/30 rounded-2xl p-5 mb-4 glow-sm">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-xl bg-green-500/20 border border-green-500/30 flex items-center justify-center">
+                    <span class="text-green-400 font-display font-bold text-lg">{{ espacio.numero_espacio }}</span>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold">Espacio {{ espacio.numero_espacio }}</h3>
+                    <p class="text-slate-400 text-sm">Piso {{ espacio.piso }} — {{ espacio.tipo_espacio }}</p>
+                    <p class="text-green-400 text-sm font-medium">S/ {{ espacio.tarifa_por_hora }}/hora</p>
+                </div>
+                <div class="ml-auto">
+                    <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-xs px-3 py-1 rounded-full">Disponible</span>
+                </div>
+            </div>
+        </div>
+        <div class="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-8 glow">
+            <h2 class="font-display text-xl font-semibold text-white mb-6">Datos de la Reserva</h2>
+            {% if error %}
+            <div class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-5 text-sm">
+                <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                </svg>
+                {{ error }}
+            </div>
+            {% endif %}
+            <form method="post" action="/reservas/nueva/{{ espacio.id_espacio }}" class="space-y-5">
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Fecha y Hora de Inicio</label>
+                    <input type="datetime-local" name="fecha_inicio"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                </div>
+                <div>
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Fecha y Hora de Fin</label>
+                    <input type="datetime-local" name="fecha_fin"
+                        class="w-full bg-slate-900/50 border border-slate-600/50 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-sky-500/60 focus:ring-1 focus:ring-sky-500/30 transition" required>
+                </div>
+                <div class="bg-slate-900/50 border border-slate-600/30 rounded-xl p-4">
+                    <div class="flex justify-between text-sm text-slate-400 mb-1">
+                        <span>Tarifa por hora</span>
+                        <span>S/ {{ espacio.tarifa_por_hora }}</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-slate-400 mb-1">
+                        <span>Duración estimada</span>
+                        <span id="duracion">— horas</span>
+                    </div>
+                    <div class="border-t border-slate-600/30 mt-2 pt-2 flex justify-between font-semibold text-white">
+                        <span>Total estimado</span>
+                        <span id="total" class="text-sky-400">S/ —</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="/dashboard"
+                        class="flex-1 text-center bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 rounded-xl transition">
+                        ← Volver
+                    </a>
+                    <button type="submit"
+                        class="flex-1 bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/25 active:scale-95">
+                        Confirmar Reserva
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const tarifaHora = parseFloat("{{ espacio.tarifa_por_hora or 3.0 }}");
+    const inicio = document.querySelector('[name="fecha_inicio"]');
+    const fin = document.querySelector('[name="fecha_fin"]');
+
+    function calcular() {
+        if (!inicio.value || !fin.value) return;
+        const diff = (new Date(fin.value) - new Date(inicio.value)) / 3600000;
+        if (diff <= 0) {
+            document.getElementById('duracion').textContent = '— horas';
+            document.getElementById('total').textContent = 'S/ —';
+            return;
+        }
+        document.getElementById('duracion').textContent = diff.toFixed(1) + ' horas';
+        document.getElementById('total').textContent = 'S/ ' + (tarifaHora * diff).toFixed(2);
+    }
+
+    inicio.addEventListener('change', calcular);
+    fin.addEventListener('change', calcular);
+</script>
+{% endblock %}
